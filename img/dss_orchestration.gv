@@ -1,0 +1,21 @@
+
+    digraph data_model {
+    layout=dot;
+    rankdir=LR;
+    bgcolor=white;
+    edge [len=2 labeldistance=2 fontsize=12 fontname="Eurostile" color=black];
+    overlap=scale;
+    splines=true;
+    sep=.3;
+    fontsize=16;
+    fontname="Courier";
+    label="\nDecison Support System Orchestration\n";
+
+    node [shape=record color=black fontsize=12 fontname="Courier" style="filled,rounded" fontcolor=black fillcolor=white];
+
+	ingest -> structure -> compute_product_category -> compute_sales_flat;
+	structure -> compute_product -> compute_sales_flat;
+	structure -> compute_customer -> compute_sales_flat;
+	structure -> compute_sales -> compute_sales_flat;
+	
+         }

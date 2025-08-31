@@ -1,0 +1,102 @@
+digraph rdss{
+#layout=dot;
+#rankdir=BT;
+#rankdir=LR;
+#rankdir=TB;
+#newrank=true;
+#layout=sfdp;
+#layout=fdp;
+#layout=twopi;
+layout=neato;
+bgcolor=white;
+#edge [len=2 labeldistance=2 color=white arrowhead=none];
+edge [color=black fontcolor=black];
+#start="random";
+overlap=scale;
+#splines=true;
+#pack=true;
+sep=.2;
+fontsize=12;
+fontname="Eurostile";
+fontcolor=black;
+
+#label="\nDecision Support System (DSS)\nGeneric Architecture\n";
+
+#test [shape=none, label="", image="stef03.jpg"];
+
+# External Entities
+node[shape=box3d fontsize=12 fontname="Eurostile" style=filled fillcolor=lawngreen];
+suppliers [label="\lData\lSuppliers  \l\l"];
+admin [label="\lData\lAdmins  \l\l"];
+#admin2 [label="\lData\lAdmins  \l\l"];
+sysadmin [label="\lSystem\lAdmins  \l\l"];
+consumers [label="\lData\lConsumers   \l\l"];
+explorers [label="\lData\lExplorers  \l\l"];
+
+# Processes
+node[shape=rectangle style="filled,rounded" fillcolor=cyan];
+land_process [label="Land \n"];
+ingest_process [label="Ingest \n"];
+structure_process [label="Structure \n"];
+fix_process [label="Fix\n"];
+integrate_process [label="Integrate \n"];
+curate_process [label="Curate \n"];
+serve_process [label="Serve \n"];
+explore_process [label="Explore \n"];
+manage_mdm [label="Manage \n"];
+#update_mdm [label="Update\nMDM\n"];
+
+# Data Files
+node[shape=folder style=filled fillcolor=yellow];
+new_files [label="\nNew\nFiles\n\n"];
+master_files [label="\nMaster\nFiles\n\n"];
+structured_files [label="\nStructured \nFiles\n\n"];
+rejected_files [label="\nRejected \nFiles\n\n"];
+integrated_files [label="\nIntegrated \nFiles\n\n"];
+curated_files [label="\nCurated \nFiles\n\n"];
+
+# Data Database
+node[shape=cylinder style=filled fillcolor=pink];
+query_engine [label="\nQuery\nEngine\n\n"];
+mdm_data [label="\nMDM\nDatabase  "];
+#mdm_data2 [label="\nMDM\nDatabase  "];
+
+# Ranks
+
+#{rank = same; pull_process; push_process};
+{rank = same; fix_process; structure_process};
+{rank = same; structured_files; rejected_files};
+#{rank = same; bi_tools; alert_process; update_mdm};
+
+# Flows
+
+suppliers -> land_process -> new_files;
+#suppliers -> push_process -> new_files;
+
+new_files -> ingest_process;
+
+ingest_process -> master_files;
+master_files -> structure_process -> structured_files;
+structure_process -> rejected_files;
+
+rejected_files -> fix_process -> master_files;
+sysadmin -> fix_process;
+
+structured_files -> integrate_process -> integrated_files -> curate_process -> curated_files;
+	
+curated_files -> serve_process;
+curated_files -> query_engine -> serve_process;
+serve_process -> consumers [label="Analytics\n&\nBusiness\nAlerts\n"];
+serve_process -> admin [label="System\nAlerts\n"];
+serve_process -> mdm_data [label="MDM\nUpdates\n"];
+
+#serve_process -> consumers [label="Alerts"];
+#serve_process -> admin [label="Alerts"];
+
+structured_files -> explore_process -> explorers;
+#structured_files -> adhoc_tools;
+#alert_process -> admin2;
+
+admin -> manage_mdm -> mdm_data -> land_process;
+
+}

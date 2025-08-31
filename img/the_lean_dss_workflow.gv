@@ -1,0 +1,108 @@
+digraph gfg {
+
+# lighter version of the original process
+# assume #nobacklog (the backlog exists in the users head, spreadsheet, desk, we don't care, not manage by IT)
+# assume #nostory (the user can answer "what do you need next?" is all we need)
+# assume #noestimate (just get it done, no long term view beside "What do you need next?")
+# assume #noprioritization (the owners know what is the most valuable)
+
+edge  [len=2 labeldistance=2];
+
+rankdir=TD;
+#rankdir=LR;
+overlap=scale;
+splines=true;
+sep=.3;
+#rankdir=LR;
+
+fontsize=16;
+fontname="Helvetica";
+
+label="\n\nLean Data Systems\nWorkflow\n";
+
+# Planning
+#subgraph cluster_0 {
+#style=filled;
+#color=cyan;
+#label = "Planning";
+node [fontsize=10 fontname="Helvetica" shape=rectangle style="filled" fillcolor=white];
+AskTask [label="Engineers\nask for the\nnext feature\n"];
+ChooseTask [label="Owners\nchoose the\nnext most\nvaluable feature\n"];
+DiscussTask [label="Owners and Engineers\ndiscuss the feature\n"];
+#}
+
+# Prototyping
+#subgraph cluster_1 {
+#style=filled;
+#color=cyan;
+#label = "Prototyping";
+node [fontsize=10 fontname="Helvetica" shape=rectangle style="filled" fillcolor=white];
+BuildPrototype [label="Engineers\nbuild a\nprototype\n"];
+#}
+
+# Development
+#subgraph cluster_2 {
+#style=filled;
+#color=cyan;
+#label = "Development";
+node [fontsize=10 fontname="Helvetica" shape=rectangle style="filled" fillcolor=white];
+CreateSpecifications [label="Owners and Engineers\ncreate specifications\n"];
+DevelopFeature [label="Engineers\ndevelop\nand refactor\nthe feature\n"];
+#RefactorFeature [label="Engineers\nrefactor\nthe feature\n"];
+DeliverFeature [label="Engineers\ndeliver\nthe feature\n"];
+node [fontsize=10 fontname="Helvetica" shape=folder style="filled,rounded" fillcolor=white];
+UnitTests  [label="Automated\nTests\nLibrary\n"];
+ETLCode  [label="ETL\nCode\n"];
+#}
+
+# Approval
+#subgraph cluster_3 {
+#style=filled;
+#color=cyan;
+#label = "Approval";
+ApproveFeature [label="Owners\napprove\nthe feature\n"];
+#}
+
+# Deployment
+#subgraph cluster_3 {
+#style=filled;
+#color=cyan;
+#label = "Deployment";
+DeployFeature [label="Engineers\ndeploy\nthe feature\n"];
+#}
+
+UseFeature [label="Users\nuse\nthe feature\n"];
+
+node [fontsize=10 fontname="Helvetica" shape=ellipse style="filled,rounded" fillcolor=white];
+ApprovalEnv  [label="Approval\nEnvironment\n"];
+ProductionEnv  [label="Production\nEnvironment\n"];
+
+node [fontsize=10 fontname="Helvetica" shape=rectangle style="filled" fillcolor=red];
+
+AskTask -> ChooseTask [fontsize=10 fontname="Helvetica" label="What is the next\lthing you need?\l"];
+
+ChooseTask -> DiscussTask [fontsize=10 fontname="Helvetica" label="This is what\lI need\l"];
+
+DiscussTask -> BuildPrototype [fontsize=10 fontname="Helvetica" label="feature MAY BE\lvaluable\land feasible?\l-> Prototype\l"];
+DiscussTask -> AskTask [fontsize=10 fontname="Helvetica" label="feature IS NOT\lvaluable\lor feasible?\l-> Stop\l"];
+DiscussTask -> CreateSpecifications [fontsize=10 fontname="Helvetica" label="feature IS\lvaluable\land feasible?\l-> Build"];
+
+BuildPrototype -> DiscussTask [fontsize=10 fontname="Helvetica" label="The prototype\lis ready\l"]
+	
+CreateSpecifications -> UnitTests;
+
+UnitTests -> DevelopFeature [fontsize=10 fontname="Helvetica" label="Test-Driven ETL\lDevelopment\l"];
+	
+DevelopFeature -> ETLCode;
+
+ETLCode -> DeliverFeature [fontsize=10 fontname="Helvetica" label="when all the\ltests pass\l"];
+DeliverFeature -> ApprovalEnv;
+ApprovalEnv -> ApproveFeature;
+ApproveFeature -> CreateSpecifications [fontsize=10 fontname="Helvetica" label="need more\lwork\l"];
+ApproveFeature -> DeployFeature [fontsize=10 fontname="Helvetica" label="approved\l"];
+DeployFeature -> ProductionEnv;
+ProductionEnv -> UseFeature;
+
+DeployFeature -> AskTask [fontsize=10 fontname="Helvetica" label="Done"];
+
+}

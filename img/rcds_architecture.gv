@@ -1,0 +1,122 @@
+digraph rcds{
+layout=dot;
+#rankdir=BT;
+#rankdir=LR;
+#rankdir=TB;
+#newrank=true;
+#layout=sfdp;
+#layout=fdp;
+#layout=twopi;
+#layout=neato;
+bgcolor=white;
+#edge [len=2 labeldistance=2 color=white arrowhead=none];
+edge [color=black fontcolor=black];
+#start="random";
+overlap=scale;
+splines=true;
+#pack=true;
+sep=.3;
+fontsize=12;
+fontname="Eurostile";
+fontcolor=black;
+
+label="\nRecomputable Data System (RCDS) Architecture\n";
+
+# External Entities
+node[shape=box3d fontsize=12 fontname="Eurostile" style=filled fillcolor=white];
+suppliers [label="\nData\nSuppliers  \n\n"];
+admin1 [label="\nData\n Admins  \n\n"];
+admin2 [label="\nData\n Admins  \n\n"];
+consumers [label="\nData\nConsumers  \n\n"];
+
+subgraph cluster_1 {
+style=filled;
+color=cyan;
+label = "Landing Zone ";
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+pull_process [label="Pull"];
+node[shape=folder style=filled fillcolor=white];
+new_files [label="\nNew\nFiles\n\n"];
+}
+
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+push_process [label="Push"];
+
+suppliers -> pull_process -> new_files;
+suppliers -> push_process -> new_files;
+
+subgraph cluster_2 {
+style=filled;
+color=cyan;
+label = "Raw Zone";
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+#manage_process [label="Manage "];
+ingest_process [label="Ingest"];
+node[shape=folder style=filled fillcolor=white];
+raw_files [label="\nRaw\nFiles\n\n"];
+}
+
+new_files -> ingest_process;
+ingest_process -> raw_files;
+
+subgraph cluster_3 {
+style=filled;
+color=cyan;
+label = "Structured Zone";
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+structure_process [label="Structure "];
+node[shape=folder style=filled fillcolor=white];
+structured_files [label="\nStructured \nFiles\n\n"];
+bad_files [label="\nBad\nFiles\n\n"];
+}
+
+raw_files -> structure_process -> structured_files;
+structure_process -> bad_files;
+
+subgraph cluster_4 {
+style=filled;
+color=cyan;
+label = "Integrated Zone ";
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+curate_process [label="Integrate "];
+node[shape=folder style=filled fillcolor=white];
+curated_files [label="\nIntegrated \nFiles\n\n"];
+}
+
+structured_files -> curate_process -> curated_files;
+
+subgraph cluster_5 {
+style=filled;
+color=cyan;
+label = "Curated Zone ";
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+serve_process [label="Curate "];
+node[shape=folder style=filled fillcolor=white];
+served_files [label="\nCurated \nFiles\n\n"];
+node[shape=cylinder style=filled fillcolor=white];
+query_engine [label="\nQuery\nEngine\n\n"];
+}
+
+curated_files -> serve_process -> served_files -> query_engine -> query_tools -> consumers;
+
+# MDM
+node[shape=cylinder style=filled fillcolor=white];
+mdm_data1 [label="\nMDM\nDatabase  "];
+mdm_data2 [label="\nMDM\nDatabase  "];
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+fix_files[label="Fix\nFiles "];
+manage_mdm [label="Manage\nMDM "];
+update_mdm [label="Update\nMDM "];
+
+admin1 -> manage_mdm -> mdm_data1 -> ingest_process;
+
+bad_files -> fix_files;
+admin2 -> fix_files -> raw_files;
+
+query_engine -> update_mdm -> mdm_data2;
+
+# Users
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+query_tools [label="Query\nTools\n"];
+
+}

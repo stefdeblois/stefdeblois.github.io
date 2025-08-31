@@ -1,0 +1,18 @@
+
+    digraph data_model {
+    layout=dot;
+    rankdir=TD;
+    bgcolor=white;
+    edge [len=2 labeldistance=2 fontsize=12 fontname="Eurostile" color=black arrowhead=crow];
+    overlap=scale;
+    splines=true;
+    sep=.3;
+    fontsize=16;
+    fontname="Courier";
+    label="\nRCDS Example - Flat Data Model\n";
+
+    node [shape=record color=black fontsize=12 fontname="Courier" style="filled,rounded" fontcolor=black fillcolor=aquamarine];
+
+	sales_flat [label="{\N\n|sales_id\l|sales_time\lsales_channel\lsales_quantity\lsales_price\lproduct_id\lproduct_name\lproduct_category_id\lproduct_category_name\lcustomer_id_billing\lcustomer_name_billing\lcustomer_address_billing\lcustomer_city_billing\lcustomer_state_billing\lcustomer_zip_billing\lcustomer_phone_billing\lcustomer_id_delivery\lcustomer_name_delivery\lcustomer_address_delivery\lcustomer_city_delivery\lcustomer_state_delivery\lcustomer_zip_delivery\lcustomer_phone_delivery\l}"];
+	
+         }

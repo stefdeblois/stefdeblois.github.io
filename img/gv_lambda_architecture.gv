@@ -1,0 +1,66 @@
+digraph dataarch{
+rankdir=LR;
+#newrank=true;
+
+        node[shape=record]
+		
+        subgraph source{
+        enti1 [label="Source 1" shape=box];
+        enti2 [label="Source 2" shape=box];
+        enti3 [label="Visualization" shape=box];
+	    }
+		
+        subgraph cluster_staging{
+                        label ="Permanent Staging Area (PSA)";
+						proc0 [label="\nStaging\nProcess\n\n" shape=Mrecord];
+						store0 [label="Staging data\n"];
+        }
+
+        subgraph cluster_batch{
+                        label ="Batch Layer";
+                        #proc1 [label="{<f0> 1.1|<f1> Batch\nInput\n\n\n}" shape=Mrecord];
+                        proc11 [label="\nMaster\nProcess\n\n" shape=Mrecord];
+                        store1 [label="{Master data}"];
+                        proc12 [label="\nBatch\nProcess\n\n" shape=Mrecord];
+               
+                        #{rank=same; store1, store2}
+        }
+
+        subgraph cluster_speed{
+                        label ="Speed Layer";
+                        #proc1 [label="{<f0> 1.1|<f1> Batch\nInput\n\n\n}" shape=Mrecord];
+                        proc21 [label="\nSpeed\nProcess\n\n" shape=Mrecord];
+                        #{rank=same; store1, store2}
+        }
+
+        subgraph cluster_serving{
+                        label ="Serving Layer";
+                        store2 [label="{Batch data}"];
+                        store3 [label="{Speed data}"];
+						proc31 [label="\nServing\nProcess\n\n" shape=Mrecord];
+                        #proc2 [label="<f0>1.2|<f1>Batch\nProcess\n\n\n" shape=Mrecord];
+                        #store2 [label="{<f0>d2|<f1>Batch data}"];
+                        #{rank=same; store1, store2}
+        }
+			
+        enti1 -> proc0
+        enti2 -> proc0
+		
+		proc0 -> store0
+		
+		store0 -> proc11
+		store0 -> proc21
+		
+		proc11 -> store1
+        #store1 -> proc1
+        store1 -> proc12
+        proc12 -> store2
+        #store2 -> proc1 
+		
+		proc21 -> store3
+		
+		store2 -> proc31
+		store3 -> proc31
+		
+		proc31 -> enti3
+}

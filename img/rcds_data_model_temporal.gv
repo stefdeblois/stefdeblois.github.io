@@ -1,0 +1,29 @@
+
+    digraph data_model {
+    layout=dot;
+    rankdir=TD;
+    bgcolor=white;
+    edge [len=2 labeldistance=2 fontsize=12 fontname="Eurostile" color=black arrowhead=crow];
+    overlap=scale;
+    splines=true;
+    sep=.3;
+    fontsize=16;
+    fontname="Courier";
+    label="\nRCDS Example - Temporal Data Model\n";
+
+    node [shape=record color=black fontsize=12 fontname="Courier" style="filled,rounded" fontcolor=black fillcolor=azure];
+	
+    product_category [label="{\N\n|product_category_id (pk)\lrec_eff_time (pk)\l|rec_exp_time\lrec_is_current\lproduct_category_name\l}"];
+        
+	product [label="{\N\n|product_id (pk)\lrec_eff_time (pk)\l|rec_exp_time\lrec_is_current\lproduct_name\lproduct_category_id (fk)\l}"];
+    
+	customer [label="{\N\n|customer_id (pk)\lrec_eff_time (pk)\l|rec_exp_time\lrec_is_current\lcustomer_name\lcustomer_address\lcustomer_city\lcustomer_state\lcustomer_zip\lcustomer_phone\l}"];
+	
+    node [shape=record color=black fontsize=12 fontname="Courier" style="filled,rounded" fontcolor=black fillcolor=aquamarine];
+
+	sales [label="{\N\n|sales_id (pk)\l|sales_time\lsales_channel\lsales_quantity\lsales_price\lproduct_id (fk)\lcustomer_id_billing (fk)\lcustomer_id_delivery (fk)\l}"];
+	
+    product_category -> product -> sales;
+    customer -> sales [label="billing"];
+    customer -> sales [label="delivery"];
+         }

@@ -1,0 +1,128 @@
+digraph rcds{
+layout=dot;
+#rankdir=BT;
+rankdir=LR;
+#rankdir=TB;
+#newrank=true;
+#layout=sfdp;
+#layout=fdp;
+#layout=twopi;
+#layout=neato;
+bgcolor=white;
+#edge [len=2 labeldistance=2 color=white arrowhead=none];
+edge [color=black fontcolor=black];
+#start="random";
+overlap=scale;
+splines=true;
+#pack=true;
+sep=.3;
+fontsize=12;
+fontname="Eurostile";
+fontcolor=black;
+
+label="\nData Lake Architecture\n";
+
+# External Entities
+node[shape=box3d fontsize=12 fontname="Eurostile" style=filled fillcolor=white];
+suppliers [label="\lData\lSuppliers  \l\l"];
+admin1 [label="\lData\lAdmins  \l\l"];
+admin2 [label="\lData\lAdmins  \l\l"];
+consumers [label="\lData\lConsumers   \l\l"];
+explorers [label="\lData\lExplorers  \l\l"];
+
+# Ingest
+subgraph cluster_1 {
+style=filled;
+color=cyan;
+label = "Ingest";
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+pull_process [label="Pull"];
+ingest_process [label="Ingest"];
+#fix_files[label="Fix\nFiles "];
+node[shape=folder style=filled fillcolor=white];
+new_files [label="\nNew\nFiles\n\n"];
+#{rank = same; ingest_process; fix_process}
+}
+
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+push_process [label="Push"];
+
+suppliers -> pull_process -> new_files;
+suppliers -> push_process -> new_files;
+
+new_files -> ingest_process;
+
+#admin1 -> fix_process;
+
+# Compute
+subgraph cluster_2 {
+style=filled;
+color=cyan;
+label = "Compute";
+node[shape=folder style=filled fillcolor=white];
+structured_files [label="\nStructured \nFiles\n\n"];
+master_files [label="\nMaster\nFiles\n\n"];
+rejected_files [label="\nRejected\nFiles\n\n"];
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+fix_process [label="Fix"];
+structure_process [label="Structure "];
+curate_process [label="Curate "];
+#{rank = same; structure_process; structured_files}
+#{rank = same; structure_process; fix_process; curate_process}
+}
+
+ingest_process -> master_files;
+master_files -> structure_process -> structured_files;
+structure_process -> rejected_files;
+
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+#fix_process [label="Fix"];
+
+rejected_files -> fix_process -> master_files;
+
+# Serve
+subgraph cluster_6 {
+style=filled;
+color=cyan;
+label = "Serve";
+node[shape=folder style=filled fillcolor=white];
+curated_files [label="\nCurated \nFiles\n\n"];
+node[shape=cylinder style=filled fillcolor=white];
+query_engine [label="\nQuery\nEngine\n\n"];
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+bi_tools [label="Reporting \nTools\n"];
+am_tools [label="Business \nAlerts\n"];
+sysalerts [label="System \nAlerts\n"];
+{rank = same; bi_tools; am_tools; sysalerts}
+
+}
+
+structured_files -> curate_process -> curated_files;
+
+# Explore
+subgraph cluster_7 {
+style=filled;
+color=cyan;
+label = "Explore";
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+adhoc_tools [label="Exploration\nTools\n"];
+}
+	
+curated_files -> query_engine -> bi_tools -> consumers;
+curated_files -> am_tools -> consumers;
+curated_files -> adhoc_tools -> explorers;
+structured_files -> adhoc_tools;
+curated_files -> sysalerts -> admin2;
+
+# MDM
+node[shape=cylinder style=filled fillcolor=white];
+mdm_data1 [label="\nMDM\nDatabase  "];
+mdm_data2 [label="\nMDM\nDatabase  "];
+node[shape=rectangle style="filled,rounded" fillcolor=white];
+manage_mdm [label="MDM\nManage\n"];
+update_mdm [label="MDM\nUpdate\n"];
+
+admin1 -> manage_mdm -> mdm_data1 -> ingest_process;
+
+curated_files -> update_mdm -> mdm_data2;
+}
