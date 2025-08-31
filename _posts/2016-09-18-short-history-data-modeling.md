@@ -1,6 +1,7 @@
+---
 layout: post
 title: A short history of Data Modeling
-date: 2025-08-31
+---
 
 ![coco2](/img/coco2-1.jpg)
 

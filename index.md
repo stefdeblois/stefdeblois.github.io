@@ -1,6 +1,6 @@
-layout: default
+# Kété Creek Labs
+Articles and software development resources
 
-Welcome to My Site
+[Blog](blog.md)
 
-Blog (/blog)
-Pocket Guide (/pocket-guide)
+[Pocket Guide](pocket-guide.md)
