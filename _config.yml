@@ -1,0 +1,5 @@
+title: Carter River Labs
+description: Articles and software development resources
+baseurl: "" # Leave empty for user sites
+url: "https://stefdeblois.github.io"
+theme: jekyll-theme-minimal # Optional: Choose a theme
