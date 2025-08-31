@@ -3,3 +3,7 @@ description: Articles and software development resources
 baseurl: "" # Leave empty for user sites
 url: "https://stefdeblois.github.io"
 theme: jekyll-theme-minimal # Optional: Choose a theme
+
+header_pages:
+  - blog.md
+  - pocket-guide.md
