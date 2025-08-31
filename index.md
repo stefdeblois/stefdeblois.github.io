@@ -1,3 +1,9 @@
+<style>
+body, .markdown-body {
+    font-family: 'Courier New', Courier, monospace;
+}
+</style>
+
 # Kété Creek Labs
 
 Data Warehousing, Analytics, Lean Project Management
