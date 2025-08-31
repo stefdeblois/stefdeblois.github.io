@@ -1,13 +1,13 @@
 digraph rdss{
-#layout=dot;
+layout=dot;
 #rankdir=BT;
-#rankdir=LR;
+rankdir=LR;
 #rankdir=TB;
 #newrank=true;
 #layout=sfdp;
 #layout=fdp;
 #layout=twopi;
-layout=neato;
+#layout=neato;
 bgcolor=white;
 #edge [len=2 labeldistance=2 color=white arrowhead=none];
 edge [color=black fontcolor=black];
@@ -25,47 +25,58 @@ fontcolor=black;
 #test [shape=none, label="", image="stef03.jpg"];
 
 # External Entities
-node[shape=box3d fontsize=12 fontname="Eurostile" style=filled fillcolor=lawngreen];
-suppliers [label="\lData\lSuppliers  \l\l"];
-admin [label="\lData\lAdmins  \l\l"];
-#admin2 [label="\lData\lAdmins  \l\l"];
-sysadmin [label="\lSystem\lAdmins  \l\l"];
-consumers [label="\lData\lConsumers   \l\l"];
-explorers [label="\lData\lExplorers  \l\l"];
+node[shape=box3d fontsize=12 fontname="Eurostile" style=filled fillcolor=lawngreen fixedsize=true width=1.2 height=1.2];
+suppliers [label="Data\nSuppliers\n"];
+admin [label="Data\nAdmins\n"];
+sysadmin [label="System\nAdmins\n"];
+consumers [label="Data\nConsumers\n"];
+explorers [label="Data\nExplorers\n"];
 
+#subgraph cluster_1 {
 # Processes
-node[shape=rectangle style="filled,rounded" fillcolor=cyan];
+node[shape=circle style="filled,rounded" fillcolor=cyan fixedsize=true width=1.2 height=1.2];
+subgraph cluster_etl {
+label="ETL";
 land_process [label="Land \n"];
 ingest_process [label="Ingest \n"];
 structure_process [label="Structure \n"];
-fix_process [label="Fix\n"];
 integrate_process [label="Integrate \n"];
 curate_process [label="Curate \n"];
 serve_process [label="Serve \n"];
-explore_process [label="Explore \n"];
-manage_mdm [label="Manage \n"];
-#update_mdm [label="Update\nMDM\n"];
-
-# Data Files
-node[shape=folder style=filled fillcolor=yellow];
+node[shape=rectangle style="rounded,filled" fillcolor=yellow fixedsize=true width=1.2 height=1.2];
 new_files [label="\nNew\nFiles\n\n"];
 master_files [label="\nMaster\nFiles\n\n"];
 structured_files [label="\nStructured \nFiles\n\n"];
-rejected_files [label="\nRejected \nFiles\n\n"];
 integrated_files [label="\nIntegrated \nFiles\n\n"];
 curated_files [label="\nCurated \nFiles\n\n"];
+node[shape=cylinder style=filled fillcolor=pink fixedsize=true width=1.2 height=1.2];
+query_engine [label="\nQuery\nEngine\n\n"];
+}
+alert_process [label="System\nAlert\n"];
+fix_process [label="System\nFix\n"];
+explore_process [label="Explore \n"];
+manage_mdm [label="Manage\nMDM\n"];
+monitor_mdm [label="Monitor\nMDM\n"];
+
+
+# Data Files
+#subgraph cluster_2 {
+#label="Storage";
+node[shape=rectangle style="rounded,filled" fillcolor=yellow fixedsize=true width=1.2 height=1.2];
+rejected_files [label="\nRejected \nFiles\n\n"];
+#{rank = same; structured_files; rejected_files};
+#}
 
 # Data Database
-node[shape=cylinder style=filled fillcolor=pink];
-query_engine [label="\nQuery\nEngine\n\n"];
+node[shape=cylinder style=filled fillcolor=pink fixedsize=true width=1.2 height=1.2];
 mdm_data [label="\nMDM\nDatabase  "];
 #mdm_data2 [label="\nMDM\nDatabase  "];
+#}
 
 # Ranks
 
-#{rank = same; pull_process; push_process};
-{rank = same; fix_process; structure_process};
-{rank = same; structured_files; rejected_files};
+{rank = same; admin; consumers};
+#{rank = same; fix_process; structure_process};
 #{rank = same; bi_tools; alert_process; update_mdm};
 
 # Flows
@@ -79,16 +90,20 @@ ingest_process -> master_files;
 master_files -> structure_process -> structured_files;
 structure_process -> rejected_files;
 
-rejected_files -> fix_process -> master_files;
-sysadmin -> fix_process;
+rejected_files -> alert_process -> sysadmin -> fix_process -> master_files;
+rejected_files -> fix_process;
 
 structured_files -> integrate_process -> integrated_files -> curate_process -> curated_files;
 	
-curated_files -> serve_process;
+#curated_files -> serve_process;
 curated_files -> query_engine -> serve_process;
-serve_process -> consumers [label="Analytics\n&\nBusiness\nAlerts\n"];
-serve_process -> admin [label="System\nAlerts\n"];
-serve_process -> mdm_data [label="MDM\nUpdates\n"];
+serve_process -> consumers [label="Analytics"];
+serve_process -> consumers [label="Business\nAlerts\n"];
+#serve_process -> admin [label="MDM\nAlerts\n"];
+#serve_process -> mdm_data [label="MDM\nUpdates\n"];
+query_engine -> monitor_mdm;
+monitor_mdm -> mdm_data [label="MDM\nUpdates\n"];
+monitor_mdm -> admin [label="MDM\nAlerts\n"];
 
 #serve_process -> consumers [label="Alerts"];
 #serve_process -> admin [label="Alerts"];
@@ -97,6 +112,6 @@ structured_files -> explore_process -> explorers;
 #structured_files -> adhoc_tools;
 #alert_process -> admin2;
 
-admin -> manage_mdm -> mdm_data -> land_process;
+admin -> manage_mdm -> mdm_data -> ingest_process;
 
 }
