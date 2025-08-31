@@ -1,7 +1,5 @@
----
-layout: post
-title: A short history of Data Modeling
----
+# A short history of Data Modeling
+#### 09/18/2016
 
 ![coco2](/img/coco2-1.jpg)
 
