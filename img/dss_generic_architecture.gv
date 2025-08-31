@@ -32,66 +32,55 @@ sysadmin [label="System\nAdmins\n"];
 consumers [label="Data\nConsumers\n"];
 explorers [label="Data\nExplorers\n"];
 
-#subgraph cluster_1 {
 # Processes
 node[shape=circle style="filled,rounded" fillcolor=cyan fixedsize=true width=1.2 height=1.2];
-subgraph cluster_etl {
-label="ETL";
-land_process [label="Land \n"];
-ingest_process [label="Ingest \n"];
-structure_process [label="Structure \n"];
-integrate_process [label="Integrate \n"];
-curate_process [label="Curate \n"];
-serve_process [label="Serve \n"];
-node[shape=rectangle style="rounded,filled" fillcolor=yellow fixedsize=true width=1.2 height=1.2];
-new_files [label="\nNew\nFiles\n\n"];
-master_files [label="\nMaster\nFiles\n\n"];
-structured_files [label="\nStructured \nFiles\n\n"];
-integrated_files [label="\nIntegrated \nFiles\n\n"];
-curated_files [label="\nCurated \nFiles\n\n"];
-node[shape=cylinder style=filled fillcolor=pink fixedsize=true width=1.2 height=1.2];
-query_engine [label="\nQuery\nEngine\n\n"];
-}
-alert_process [label="System\nAlert\n"];
-fix_process [label="System\nFix\n"];
-explore_process [label="Explore \n"];
+#land_process [label="Land\n"];
+#monitor_process [label="Monitor\n"];
+ingest_process [label="Ingest\n"];
+structure_process [label="Structure\n"];
+integrate_process [label="Integrate\n"];
+curate_process [label="Curate\n"];
+serve_process [label="Serve\n"];
+alert_process [label="File\nAlerts\n"];
+fix_process [label="File\nFixes\n"];
+explore_process [label="Explore\n"];
 manage_mdm [label="Manage\nMDM\n"];
 monitor_mdm [label="Monitor\nMDM\n"];
 
-
 # Data Files
-#subgraph cluster_2 {
-#label="Storage";
 node[shape=rectangle style="rounded,filled" fillcolor=yellow fixedsize=true width=1.2 height=1.2];
-rejected_files [label="\nRejected \nFiles\n\n"];
-#{rank = same; structured_files; rejected_files};
-#}
+raw_files [label="\nRaw\nFiles\n\n"];
+#validated_files [label="\nValidated\nFiles\n\n"];
+rejected_files [label="\nRejected\nFiles\n\n"];
+#master_files [label="\nMaster\nFiles\n\n"];
+#unstructured_files [label="\nUnstructured\nFiles\n\n"];
+structured_files [label="\nStructured\nFiles\n\n"];
+integrated_files [label="\nIntegrated\nFiles\n\n"];
+curated_files [label="\nCurated\nFiles\n\n"];
 
 # Data Database
 node[shape=cylinder style=filled fillcolor=pink fixedsize=true width=1.2 height=1.2];
-mdm_data [label="\nMDM\nDatabase  "];
-#mdm_data2 [label="\nMDM\nDatabase  "];
-#}
+query_engine [label="\nQuery\nEngine\n\n"];
+mdm_data1 [label="\nMDM\nDatabase\n1 of 2"];
+mdm_data2 [label="\nMDM\nDatabase\n2 of 2"];
 
 # Ranks
 
-{rank = same; admin; consumers};
-#{rank = same; fix_process; structure_process};
+#{rank = same; rejected_files, mdm_data1};
+{rank = same; raw_files, ingest_process, raw_files, structure_process, structured_files, integrate_process, integrated_files, curate_process, curated_files};
 #{rank = same; bi_tools; alert_process; update_mdm};
 
 # Flows
 
-suppliers -> land_process -> new_files;
-#suppliers -> push_process -> new_files;
+suppliers -> ingest_process -> raw_files;
+#suppliers -> push_process -> raw_files;
 
-new_files -> ingest_process;
-
-ingest_process -> master_files;
-master_files -> structure_process -> structured_files;
+raw_files -> structure_process -> structured_files;
+#ingest_process -> structured_files;
 structure_process -> rejected_files;
 
-rejected_files -> alert_process -> sysadmin -> fix_process -> master_files;
-rejected_files -> fix_process;
+rejected_files -> alert_process -> sysadmin -> fix_process -> raw_files;
+#rejected_files -> fix_process;
 
 structured_files -> integrate_process -> integrated_files -> curate_process -> curated_files;
 	
@@ -102,7 +91,7 @@ serve_process -> consumers [label="Business\nAlerts\n"];
 #serve_process -> admin [label="MDM\nAlerts\n"];
 #serve_process -> mdm_data [label="MDM\nUpdates\n"];
 query_engine -> monitor_mdm;
-monitor_mdm -> mdm_data [label="MDM\nUpdates\n"];
+#monitor_mdm -> mdm_data2 [label="MDM\nUpdates\n"];
 monitor_mdm -> admin [label="MDM\nAlerts\n"];
 
 #serve_process -> consumers [label="Alerts"];
@@ -112,6 +101,7 @@ structured_files -> explore_process -> explorers;
 #structured_files -> adhoc_tools;
 #alert_process -> admin2;
 
-admin -> manage_mdm -> mdm_data -> ingest_process;
+admin -> manage_mdm -> mdm_data2;
+mdm_data1 -> ingest_process;
 
 }
