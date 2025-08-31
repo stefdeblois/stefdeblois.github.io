@@ -4,7 +4,7 @@ body, .markdown-body {
 }
 </style>
 
-# Kété Creek Labs
+# STF Labs
 
 Data Warehousing, Analytics, Lean Project Management
 
