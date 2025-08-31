@@ -1,7 +1,5 @@
----
-layout: post
-title: How to fill the missing history?
----
+# How to fill the missing history?
+#### 10/08/2016
 
 In data warehousing, temporal data models and data flows have a real tendency to become complex very quickly. Adding to this, you may have to handle multiple disparate data sources 
 that do not merge very well. You may want to load the same type of business events from multiple sources and run into missing attributes that creates blanks in your 

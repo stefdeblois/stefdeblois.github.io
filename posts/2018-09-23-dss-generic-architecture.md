@@ -1,8 +1,5 @@
----
-layout: post
-title: Decision Support Systems
-subtitle: A Generic Architecture
----
+# Decision Support Systems, a Generic Architecture
+#### 09/23/2018
 
 An architecture supporting a Decision Support System (DSS) contains multiple roles, repositories and processes working together to transform your raw data into business information.
 

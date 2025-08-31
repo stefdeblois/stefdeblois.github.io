@@ -1,7 +1,5 @@
----
-layout: post
-title: The Lambda Architecture ... Speed and Agility
----
+# The Lambda Architecture ... Speed and Agility
+#### 10/06/2016
 
 For experienced data architects processing data for data warehouses and business intelligence solutions, we have been used to think “incrementally”. We have been creating complex data models and incremental load processes that are effectively required to work around the limitations in storage and speed of our databases and ETL tools.
 

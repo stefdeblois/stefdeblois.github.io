@@ -1,8 +1,5 @@
----
-layout: post
-title: How to develop lean decision support systems?
-published: true
----
+# How to develop lean decision support systems?
+#### 12/22/2017
 
 ![waste-lean](/img/waste-lean.jpeg)
 

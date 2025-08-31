@@ -1,7 +1,5 @@
----
-layout: post
-title: Why you need a PSA in your data architecture?
----
+# Why you need a PSA in your data architecture?
+#### 09/29/2016
 
 In my current data systems, I usually create a persistent staging area (PSA) that receives 
 raw/untransformed data, keeps all of it (all history), in the format we receive it (zip, json, csv, etc), etc. That first layer 

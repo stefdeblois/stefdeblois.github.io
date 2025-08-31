@@ -1,8 +1,5 @@
----
-layout: post
-title: Dirty Data Modeling
-published: true
----
+# Dirty Data Modeling
+#### 11/14/2016
 
 Data Modelers are sometimes introvert people who like sifting through mountains of database schemas and documentation. Data modeling 
 is to some extent an intellectual undertaking where you almost have to reach a level of connection to the domain you study that 

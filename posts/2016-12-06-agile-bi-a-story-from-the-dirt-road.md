@@ -1,8 +1,5 @@
----
-layout: post
-title: 'Agile BI, a story from the dirt road'
-published: true
----
+# Agile BI, a story from the dirt road
+#### 12/06/2016
 
 So much has been written about agility in software development that I was really wondering what I could add that brings a little value or 
 clarity about the process and its application to Business Intelligence and Data Science. Here is a little story ...

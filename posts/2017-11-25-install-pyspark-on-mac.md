@@ -1,8 +1,5 @@
----
-layout: post
-title: Install PySpark on Mac
-published: true
----
+# Install PySpark on Mac
+#### 11/25/2017
 
 Here are the steps to follow to run Python, Pandas and PySpark on a Mac:
 
