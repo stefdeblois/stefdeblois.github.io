@@ -1,15 +1,13 @@
-# How to fill the missing history?
-#### 10/08/2016
+# How to fill the missing history
+#### 10/01/2019
 
-In data warehousing, temporal data models and data flows have a real tendency to become complex very quickly. Adding to this, you may have to handle multiple disparate data sources 
+In a data system, temporal data models and data flows have a real tendency to become complex very quickly. Adding to this, you may have to handle multiple disparate data sources 
 that do not merge very well. You may want to load the same type of business events from multiple sources and run into missing attributes that creates blanks in your 
 final serving tables.
 
-------
-
 Below is an oversimplified example of a lazy data integration:
 
-![fbm-lazy-example](/img/fbm_lazy_example.jpg "Lazy Data Integration")
+<center><img src="../img/missing_data_lazy_example.jpg" alt="drawing" width="700"/></center>
 
 "Sales Source 1" only knows the class of a user (Silver or Platinum).
 
@@ -28,11 +26,9 @@ Let's say you do a lazy integration of the two sources by just appending them:
 If you look at the two reports created from this dataset you can easily see how bad the results are. A lot of sales are going to the "unknown" buckets. You can bet 
 this is not the business reality.
 
-------
-
 Now, lets's look at this example of a smarter way to integrate these data sources:
 
-![smart-lazy-example](/img/fbm_smart_example.jpg "Smart Data Integration")
+<center><img src="../img/missing_data_smart_example.jpg" alt="drawing" width="700"/></center>
 
 First, you need to generate more accurate information about a user. To achieve this:
 

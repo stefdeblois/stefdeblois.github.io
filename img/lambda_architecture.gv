@@ -1,0 +1,99 @@
+digraph haldfd{
+rankdir=LR;
+#rankdir=TD;
+#newrank=true;
+#layout=sfdp;
+#layout=neato;
+bgcolor=white;
+#edge [len=2 labeldistance=2 color=white arrowhead=none];
+edge [color=black fontcolor=black];
+#start="random";
+overlap=scale;
+splines=true;
+#pack=true;
+sep=.3;
+fontsize=12;
+fontname="LucidaGrande";
+fontcolor=black;
+
+#label="\nLambda Architecture\n";
+
+# Sources
+
+node[shape=box3d style=filled fillcolor=white];
+
+suppliers [label="\nData\nSuppliers \n\n"];
+admin [label="\nData\n Admin  \n\n"];
+
+# Staging Layer
+
+subgraph cluster_0 {
+style=filled;
+color=lawngreen;
+label = "Staging Layer";
+node[shape=cylinder style=filled fillcolor=white];
+psa [label="\nPersistent\nStaging Area\n(psa)\n"];
+node[shape=cylinder style=filled fillcolor=white];
+mdm [label="\nMaster Data\nManagement\n(mdm)\n"];
+{rank=same; psa,mdm}
+
+}
+
+# Batch Layer
+
+subgraph cluster_1 {
+style=filled;
+color=cyan;
+label = "Batch Layer";
+node[shape=cylinder style=filled fillcolor=white];
+mds [label="\nMaster Dataset\n(mds)\n"];
+bat [label="\nBatch Data\n(bat)\n"];
+}
+
+# Speed Layer
+
+subgraph cluster_2 {
+style=filled;
+color=gold;
+label = "Speed Layer";
+node[shape=cylinder style=filled fillcolor=white];
+spd [label="\nSpeed Data\n(spd)\n"];
+}
+
+# Serving Layer
+
+subgraph cluster_3 {
+style=filled;
+color=yellow;
+label = "Serving Layer";
+node[shape=cylinder style=filled fillcolor=white];
+srvb [label="\nBatch\nViews\n(srv)\n"];
+node[shape=cylinder style=filled fillcolor=white];
+srvs [label="\nSpeed\nViews\n(srv)\n"];
+{rank=same; srvb,srvs}
+}
+
+# Data Consumers
+
+node[shape=box3d style=filled fillcolor=white];
+
+consumers [label="\nData\nConsumers \n\n"];
+
+## Arrows
+
+{rank=same; suppliers, admin}
+
+suppliers -> psa [label="stage"];
+psa -> mdm [label="publish"];
+admin -> mdm [label="manage"];
+psa -> mds [label="integrate"];
+mdm -> mds [label="integrate"];
+mds -> bat [label="compute"];
+bat -> srvb [label="view"];
+srvb -> consumers [label="query"];
+bat -> srvs [label="union"];
+spd -> srvs [label="union"];
+srvs -> consumers [label="query"];
+psa -> spd [label="stream"];
+
+}

@@ -1,8 +1,10 @@
-# Agile BI, a story from the dirt road
+# Data Systems - Agility
 #### 12/06/2016
 
 So much has been written about agility in software development that I was really wondering what I could add that brings a little value or 
-clarity about the process and its application to Business Intelligence and Data Science. Here is a little story ...
+clarity about the process and its application to Data Systems.
+
+Here is a little story ...
 
 **The Story**
 
@@ -14,14 +16,14 @@ I am thinking a Harley-Davidson, with all the bells and whistles.
 
 **Agile development is not like this:**
 
-![pic2](/img/waterfall-bike.jpeg)
+<left><img src="../img/waterfall-bike.jpeg" alt="drawing" width="600"/></left>
 
 In this mode, your first day on the road will be when the last bolt is tighten on the last day of the building process. You better not have change 
 your mind and still want a Harley ... even if you discovered that you will most likely ride on dirt roads and across mountains.
 
 **Agile development is like this:**
 
-![pic3](/img/agile-bike.jpeg)
+<left><img src="../img/agile-bike.jpeg" alt="drawing" width="600"/></left>
 
 Agile is not about working faster. It is about frequently delivering small usable software increments that gives the business more opportunities 
 to provide feedback and adjust priorities.
@@ -37,14 +39,12 @@ With short iterations ...
 
 In the end, Business Intelligence is about having your end-users feel happy and empowered to have a solution at their fingertips that helps 
 them answering the questions they have. In Data Science, it is about making other applications add value to the business by 
-behaving dynamically. This can take many forms like a web page recommendation, an adaptive call center script, or something l
-ike a scoring algorithm to determine which customers to make an offer to.
+behaving dynamically. This can take many forms like a web page recommendation, an adaptive call center script, or something like a scoring algorithm to determine which customers to make an offer to.
 
 But how do you get there? It’s a *long* drive from Yellowknife to Punta Arenas… How to avoid the Big Bang approach and the familiar 
 paralysis and waste that it creates?
 
-First of all: start small. Identify the most valuable **little** piece of software you can build, and then do it. 
-Practice [dirty data modeling](https://sdeblois.github.io/2016-11-14-dirty-data-modeling/), get involved and *focus* on this small 
+First of all: start small. Identify the most valuable **little** piece of software you can build, and then do it. Get involved and *focus* on this small 
 but valuable little piece of software that you want to build. Following agile practices, you want this first software iteration to stand by itself, to be executable and to *do* something for the business (like this kick scooter). Using the 
 first iteration to build the backend of a Harley-Davidson will not bring much value in the short term, because it just can't run 
 and generates zero useful feedback.
@@ -77,7 +77,5 @@ Another side effect of using small development increments is that it opens the d
 discover that using those 3 fact tables and 7 dimensions gives you 95% of the value you can expect from your solution. You can now 
 make a well-informed decision about investing time and money to go after this last 5% value. Is it really worth it? Or should we 
 focus on another business area instead? In a lean software development context, it eliminates waste in development and maintenance 
-of low value deliverables. Just like Ian Rogers in [My Road is Your Road](http://myroadisyourroad.tumblr.com/) you might even discover 
+of low value deliverables. You might even discover 
 that a dirt bike is really more suitable than a Harley-Davidson to ride through the forests and mountains…
-
-![pic4](/img/punta-arenas-trail.jpg "Punta Arenas")
