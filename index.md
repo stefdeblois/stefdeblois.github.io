@@ -4,7 +4,7 @@ body, .markdown-body {
 }
 </style>
 
-# Data Warehousing, Analytics, Data Modeling, Lean Project Management
+# Views on developing data solutions ...
 
 ## Blog
 
