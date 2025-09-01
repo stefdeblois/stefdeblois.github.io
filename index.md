@@ -4,9 +4,7 @@ body, .markdown-body {
 }
 </style>
 
-# STF Labs
-
-Data Warehousing, Analytics, Lean Project Management
+# Data Warehousing, Analytics, Data Modeling, Lean Project Management
 
 ## Blog
 
@@ -29,3 +27,8 @@ Data Warehousing, Analytics, Lean Project Management
 ## Resources
 
 * coming soon
+
+## Contact
+
+* [LinkedIn](https://www.linkedin.com/in/stephanedeblois/)
+* [X](https://x.com/stefdeblois)
