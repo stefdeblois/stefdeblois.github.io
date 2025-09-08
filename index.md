@@ -26,7 +26,7 @@ body, .markdown-body {
 
 ## Resources
 
-* coming soon
+* [Online Python](https://www.online-python.com/)
 
 ## Contact
 
