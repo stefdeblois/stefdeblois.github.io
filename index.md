@@ -29,9 +29,17 @@ body, .markdown-body {
 * [Online Python](https://www.online-python.com/){:target="_blank"}
 * [Swagger Editor (yaml)](https://editor.swagger.io/){:target="_blank"}
 * [JSON Viewer](https://jsonformatter.org/json-viewer){:target="_blank"}
-* [Online Python](https://www.online-python.com/)
-* [Online Python](https://www.online-python.com/)
-* [Online Python](https://www.online-python.com/)
+* [Online Text Compare](https://onlinetextcompare.com/){:target="_blank"}
+* [Regex Editor](https://regex101.com/){:target="_blank"}
+* [Graphviz Online](https://dreampuf.github.io/GraphvizOnline){:target="_blank"}
+* [WebGraphviz](http://www.webgraphviz.com/){:target="_blank"}
+* [Sketchviz](https://sketchviz.com/){:target="_blank"}
+* [ASCII Table](https://www.asciitable.com/){:target="_blank"}
+* [Symbol](https://symbl.cc/){:target="_blank"}
+* [Bullet Points](https://bulletpointsymbol.com/){:target="_blank"}
+* [Symbol](https://symbl.cc/){:target="_blank"}
+* [Parquet Reader](https://parquetreader.com/){:target="_blank"}
+* [Excalidraw Whiteboard](https://excalidraw.com/){:target="_blank"}
 
 ## Contact
 
