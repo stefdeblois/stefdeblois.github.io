@@ -8,7 +8,7 @@ body, .markdown-body {
 
 ## Blog
 
-* [06/24/2020 - A data project checklkst](posts/2020-06-24-my-bi-project-checklist.md)
+* [06/24/2020 - A data project checklist](posts/2020-06-24-my-bi-project-checklist.md)
 * [11/06/2019 - How to aggregate a variable depth hierarchy?](posts/2019-11-06-aggregate-a-variable-depth-hierarchy.md)
 * [10/01/2019 - How to fill the missing history?](posts/2019-10-01-fill-the-missing-history.md)
 * [05/22/2019 - Data, Roles & Processes](posts/2019-05-22-data-roles-and-processes.md)
