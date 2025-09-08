@@ -24,6 +24,10 @@ body, .markdown-body {
 * [09/29/2016 - Why you need a PSA in your data architecture?](posts/2016-09-29-why-you-need-a-psa-in-your-data-architecture.md)
 * [09/18/2016 - A short history of Data Modeling](posts/2016-09-18-short-history-data-modeling.md)
 
+## Data Tools
+
+* coming soon
+
 ## Resources
 
 * [Online Python](https://www.online-python.com/){:target="_blank"}
