@@ -37,7 +37,6 @@ body, .markdown-body {
 * [ASCII Table](https://www.asciitable.com/){:target="_blank"}
 * [Symbol](https://symbl.cc/){:target="_blank"}
 * [Bullet Points](https://bulletpointsymbol.com/){:target="_blank"}
-* [Symbol](https://symbl.cc/){:target="_blank"}
 * [Parquet Reader](https://parquetreader.com/){:target="_blank"}
 * [Excalidraw Whiteboard](https://excalidraw.com/){:target="_blank"}
 
