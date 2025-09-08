@@ -26,6 +26,11 @@ body, .markdown-body {
 
 ## Resources
 
+* [Online Python](https://www.online-python.com/){:target="_blank"}
+* [Swagger Editor (yaml)](https://editor.swagger.io/){:target="_blank"}
+* [JSON Viewer](https://jsonformatter.org/json-viewer){:target="_blank"}
+* [Online Python](https://www.online-python.com/)
+* [Online Python](https://www.online-python.com/)
 * [Online Python](https://www.online-python.com/)
 
 ## Contact
