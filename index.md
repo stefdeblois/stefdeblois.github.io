@@ -4,7 +4,7 @@ body, .markdown-body {
 }
 </style>
 
-# Views on developing data solutions ...
+# My personal views on analytics, data warehousing, and project management.
 
 ## Blog
 
