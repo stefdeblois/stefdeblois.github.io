@@ -4,7 +4,7 @@ body, .markdown-body {
 }
 </style>
 
-# My personal views on analytics, data warehousing, and project management.
+# Analytics, Data Warehousing, and Project Management.
 
 ## Blog
 
@@ -23,10 +23,6 @@ body, .markdown-body {
 * [10/06/2016 - The Lambda Architecture ... Speed and Agility](posts/2016-10-06-the-lambda-architecture.md)
 * [09/29/2016 - Why you need a PSA in your data architecture?](posts/2016-09-29-why-you-need-a-psa-in-your-data-architecture.md)
 * [09/18/2016 - A short history of Data Modeling](posts/2016-09-18-short-history-data-modeling.md)
-
-## Data Tools
-
-* coming soon
 
 ## Resources
 
